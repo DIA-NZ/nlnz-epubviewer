@@ -38,19 +38,26 @@ viewing of epub files by removing the dependencies to Rosetta and also by
 referencing the location of the epub files and adding an identifier to locate
 the epub file requested.
 
+
 Example of the viewer independent of Rosetta:
-	- http://localhost:8080/epubviewer/localviewer?dps_pid=<filename>
-	  (where filename is the EPUB file without .epub extension)
+
+http://localhost:8080/epubviewer/localviewer?dps_pid=&lt;filename&gt;
+(where filename is the EPUB file without .epub extension)
+
 
 The web request to the viewer defines 3 parameters:
-	- dps_pid : parameter to indicate the IE PID or epub file identifier
-	- dps_dvs : parameter to indicate the Rosetta session (optional)
-	- download : parameter to indicate if the file should be available for download
-	  (value=true|false)(optional)
+
+- dps_pid : parameter to indicate the IE PID or epub file identifier
+- dps_dvs : parameter to indicate the Rosetta session (optional)
+- download : parameter to indicate if the file should be available for download
+(value=true|false)(optional)
+
 
 Examples of the viewer within National Library of New Zealand:
-	- http://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE18254929
-	- http://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE18223617
+
+- http://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE18254929
+- http://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE18223617
+
 
 # Dependencies:
 	ReadiumJS (Version 0.14.1, Released 01.May.2014)

@@ -1,0 +1,111 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Epub Viewer</display-name>
+  
+  	<context-param>
+  		<!--
+  		Rosetta Delivery Access Web Service URL: hostname:port number
+  		If this viewer is hosted within the same Rosetta container
+  		then use: localhost:<port number>
+  		 -->
+		<param-name>ndhaDeliveryBaseURL</param-name>
+		<param-value>localhost:1801</param-value>
+	</context-param>
+	
+	<context-param>
+		<!-- Base URL for this viewer where ever it is deployed. -->
+		<param-name>viewerHostName</param-name>
+		<param-value>localhost:8080</param-value>
+	</context-param>
+	
+	<filter>
+		<filter-name>EpubContentAccessFilter</filter-name>
+		<filter-class>nz.govt.natlib.ndha.viewers.epubviewer.EpubContentAccessFilter</filter-class>
+	</filter>
+	
+	<!--
+	Filter mapping to ensure all requests to the epub exploded contents
+	are verified for validity before proceeding.
+	 -->
+	<filter-mapping>
+		<filter-name>EpubContentAccessFilter</filter-name>
+		<url-pattern>/epubContent/*</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>epubviewer</servlet-name>
+		<servlet-class>nz.govt.natlib.ndha.viewers.epubviewer.EpubViewerManagerServlet</servlet-class>
+	</servlet>
+	
+	<!-- THIS SERVLET IS STRICTLY FOR TESTING ON LOCALHOST (DEVELOPER): START -->
+	<!-- **** COMMENT THIS MAPPING FOR ANY OTHER DEPLOYMENT **** -->
+	<servlet>
+		<servlet-name>localepubviewer</servlet-name>
+		<servlet-class>nz.govt.natlib.ndha.viewers.epubviewer.EpubViewerManagerLocalServlet</servlet-class>
+	</servlet>
+	<!-- THIS SERVLET IS STRICTLY FOR TESTING ON LOCALHOST (DEVELOPER): END -->
+	
+	<servlet>
+		<servlet-name>errorpage</servlet-name>
+		<jsp-file>/error.jsp</jsp-file>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>epubviewerpane</servlet-name>
+		<jsp-file>/epubviewer.jsp</jsp-file>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>readiumepubviewer</servlet-name>
+		<jsp-file>/readiumepubviewer.jsp</jsp-file>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>epubviewer</servlet-name>
+		<url-pattern>/viewer</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>errorpage</servlet-name>
+		<url-pattern>/errorpage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>epubviewerpane</servlet-name>
+		<url-pattern>/epubviewerpane</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>readiumepubviewer</servlet-name>
+		<url-pattern>/readiumepubviewer</url-pattern>
+	</servlet-mapping>
+	
+	<!-- THIS SERVLET IS STRICTLY FOR TESTING ON LOCALHOST (DEVELOPER): START -->
+	<!-- **** COMMENT THIS MAPPING FOR ANY OTHER DEPLOYMENT **** -->
+
+	<servlet-mapping>
+		<servlet-name>localepubviewer</servlet-name>
+		<url-pattern>/localviewer</url-pattern>
+	</servlet-mapping>
+
+	<!-- THIS SERVLET IS STRICTLY FOR TESTING ON LOCALHOST (DEVELOPER PC): END -->
+
+	<!--
+	mime-mapping added for audio files to be correctly viewed in IE and Firefox.
+	The actual mime-type for .m4a files is audio/mp4 and the default mime-type
+	is text/plain which doesn't work correctly in these browsers.
+	It works fine with Chrome. Other mime-types can be added to the list if required. 
+	 -->
+	<mime-mapping>
+        <extension>m4a</extension>
+        <mime-type>audio/mp4</mime-type>
+    </mime-mapping>		
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+</web-app>

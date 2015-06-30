@@ -1,0 +1,21 @@
+Version 1.0
+====================================================================================
+Release date	: 22.Aug.2014
+Revisions		:
+	- Basic stand-alone epubviewer created
+	- FilterMapping added in web.xml to view the restricted access epub files only
+	  through a valid Rosetta session and IP address
+	- MimeMapping added in web.xml for audio files to be viewed in IE and Firefox.
+	  The actual mime-type for .m4a files is audio/mp4 and the default mime-type
+	  is text/plain which does not work in these browsers. It works fine with Chrome.
+	  We can add other mime-types to the list in future if required.
+	- MP4 audio/video files doesn't work with latest Firefox (31.0) and IE10/11 even
+	  after making changes as mentioned above in Windows XP as these browser versions
+	  are not compatible with Windows XP. Works fine in Windows 7.
+	- 'localepubviewer' servlet mapping in web.xml is only to be used for
+	  running epubviewer locally and STRICTLY to be commented when
+	  the viewer is deployed to DEV/UAT/PROD environments.
+	  This was created to support non-Rosetta sessions in local dev environment.
+	- Any changes to the epubviewer once deployed will automatically be reflected in
+	  MultiRepIEViewer and don't have to separately deploy it for MultiRepIEViewer.
+====================================================================================

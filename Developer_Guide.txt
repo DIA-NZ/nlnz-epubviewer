@@ -1,0 +1,24 @@
+System Requirements
+	- Java: Oracle Java version 1.6 or higher
+	- Tomcat: Apache Tomcat version 6.0 or higher
+	- Maven: Apache Maven  version 3.0 or higher
+
+Downloading the Binary Distribution
+	- Download the latest binary release epubviewer-1.1
+	- Extract the .tar.zg or .zip file containing the .war file and deploy it
+	  within any tomcat container or Rosetta instance
+
+Building from Source
+	- Download the source from Git either by cloning or downloading the source
+	- Setup DeliveryAccessWS dependency
+	- Import the maven project
+	- Build the project using maven
+	- Deploy the war file within Rosetta or in local mode
+
+	LOCAL MODE SETTING CHANGES:
+	- Enable the servlet mapping for /localviewer in web.xml
+	- Set LOCAL EPUB location in nz.govt.natlib.ndha.viewers.epubviewer.EpubViewerManagerLocalServlet
+	  EPUB_FILES_LOCAL_BASE_PATH = <LOCAL EPUB FILES LOCATION>;
+	  Example: EPUB_FILES_LOCAL_BASE_PATH = "C:\\dev\\nlnz\\epub_files\\";
+
+

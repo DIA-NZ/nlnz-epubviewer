@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>nz.govt.natlib.ndha.viewers</groupId>
+	<artifactId>epubviewer</artifactId>
+	<packaging>war</packaging>
+	<version>1.1-SNAPSHOT</version>
+	<name>EpubViewer Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.6</jdk.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- call mvn install:install-file -Dfile=./lib/DeliveryAccessWS-3.1.jar -DgroupId=com.exlibris.dps -DartifactId=DeliveryAccessWS -Dversion=3.1 -Dpackaging=jar -->
+		<dependency>
+			<groupId>com.exlibris.dps</groupId>
+			<artifactId>DeliveryAccessWS</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<finalName>epubviewer-${version}</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<!-- These JAR files are excluded from WAR/lib directory -->
+					<packagingExcludes>
+						WEB-INF/lib/activation*.jar,
+						WEB-INF/lib/mail*.jar,
+						WEB-INF/lib/jms*.jar,
+						WEB-INF/lib/jmxri*.jar,
+						WEB-INF/lib/jmxtools*.jar,
+						WEB-INF/lib/logkit*.jar,
+						WEB-INF/lib/avalon-framework*.jar
+					</packagingExcludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

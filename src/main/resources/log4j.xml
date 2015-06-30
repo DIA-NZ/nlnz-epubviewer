@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<!-- The above DTD refers to the log4j.dtd within the log4j.jar file using the XML catalog definition -->
+<!--
+  | For more configuration infromation and examples see the Jakarta Log4j
+  | website: http://jakarta.apache.org/log4j
+ -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <appender name="Console_Appender" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="error"/>
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %t %d{yyyy-MM-dd HH:mm:ss.SSS} -%m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="File_Appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.base}/logs/epubviewer.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="4096KB"/> <!-- limit to 4 MB -->
+        <param name="MaxBackupIndex" value="4"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p %d{yyyy-MM-dd HH:mm:ss.SSS} - %c - %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="nz.govt.natlib.ndha.viewers.epubviewer">
+        <level value="info"/>
+        <appender-ref ref="File_Appender"/>
+    </logger>
+
+    <root>
+        <priority value="error"/>
+        <appender-ref ref="Console_Appender"/>
+    </root>
+
+</log4j:configuration>

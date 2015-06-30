@@ -4,13 +4,19 @@ System Requirements
 	- Maven: Apache Maven  version 3.0 or higher
 
 Downloading the Binary Distribution
-	- Download the latest binary release epubviewer-1.1
-	- Extract the .tar.zg or .zip file containing the .war file and deploy it
-	  within any tomcat container or Rosetta instance
+	- Download the latest binary release epubviewer-1.1.war
+	- Deploy it within any tomcat container or Rosetta instance
 
 Building from Source
 	- Download the source from Git either by cloning or downloading the source
-	- Setup DeliveryAccessWS dependency
+
+	- Setup DeliveryAccessWS dependency (Rosetta)
+	To create the new WS stubs for a particular version of Rosetta:
+	- Create a maven project to with the "jaxws-maven-plugin" and "ws-import" goal
+	- Download the latest wsdl for the latest version and save it in the src directory
+	- Then build the project to generate the jar file
+	  Example WDSL URL: http://<Rosetta URL:Port>/dpsws/delivery/DeliveryAccessWS?wsdl
+
 	- Import the maven project
 	- Build the project using maven
 	- Deploy the war file within Rosetta or in local mode
